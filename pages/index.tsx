@@ -1,16 +1,14 @@
-"use client";
-import { Button, Flex, Heading, VStack, Text, HStack } from "@chakra-ui/react";
+import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import {
-  WalletWithMetadata,
   useConnectWallet,
   useLogin,
   usePrivy,
   useWallets,
 } from "@privy-io/react-auth";
 import { usePrivyWagmi } from "@privy-io/wagmi-connector";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Address, isAddressEqual } from "viem";
-import { useAccount, useDisconnect, useWalletClient } from "wagmi";
+import { useAccount, useDisconnect, useNetwork, useWalletClient } from "wagmi";
 
 export default function Home() {
   const { address, isConnected, isConnecting, isDisconnected } = useAccount();
@@ -21,6 +19,7 @@ export default function Home() {
       console.log(wallet);
     },
   });
+  const { chain, chains } = useNetwork();
   const { disconnect } = useDisconnect();
   const { data: walletClient, isFetching } = useWalletClient();
   const { authenticated, logout } = usePrivy();
@@ -37,6 +36,8 @@ export default function Home() {
       message: "hello world",
     });
   }, [walletClient]);
+
+  useEffect(() => console.log({ chain, chains }), [chain, chains]);
 
   return (
     <>

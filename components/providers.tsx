@@ -1,26 +1,31 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { PrivyProvider } from "@privy-io/react-auth";
 import { PrivyWagmiConnector } from "@privy-io/wagmi-connector";
-import { configureChains, sepolia } from "wagmi";
-import { infuraProvider } from "wagmi/providers/infura";
+import { configureChains } from "wagmi";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { AvailableChains, PreferredChain } from "@/chain";
+import { useEffect } from "react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const configureChainsConfig = configureChains(
-    [sepolia],
-    [infuraProvider({ apiKey: process.env.NEXT_PUBLIC_INFURA_API_KEY! })]
-  );
+  const wagmiChainsConfig = configureChains(AvailableChains, [
+    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY! }),
+  ]);
+
+  useEffect(() => {
+    console.log({ AvailableChains, PreferredChain, wagmiChainsConfig });
+  }, [wagmiChainsConfig]);
+
   return (
     <ChakraProvider>
       <PrivyProvider
-        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID || ""}
+        appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
         config={{
-          walletConnectCloudProjectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID,
           loginMethods: ["wallet", "google", "email"], // "email", "google", "twitter"
-          defaultChain: sepolia,
+          defaultChain: PreferredChain,
           embeddedWallets: {
             createOnLogin: "users-without-wallets",
           },
-          supportedChains: [sepolia],
+          supportedChains: AvailableChains,
           appearance: {
             theme: "dark",
             accentColor: "#676FFF",
@@ -28,7 +33,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           },
         }}
       >
-        <PrivyWagmiConnector wagmiChainsConfig={configureChainsConfig}>
+        <PrivyWagmiConnector wagmiChainsConfig={wagmiChainsConfig}>
           {children}
         </PrivyWagmiConnector>
       </PrivyProvider>
