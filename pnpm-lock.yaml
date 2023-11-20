@@ -18,8 +18,8 @@ dependencies:
     specifier: ^1.47.2
     version: 1.47.2(@babel/core@7.23.3)(@types/react@18.2.37)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
   '@privy-io/wagmi-connector':
-    specifier: ^0.1.5
-    version: 0.1.5(@privy-io/react-auth@1.47.2)(react-dom@18.2.0)(react@18.2.0)(viem@1.19.1)(wagmi@1.4.6)
+    specifier: 0.1.7-beta.1
+    version: 0.1.7-beta.1(@privy-io/react-auth@1.47.2)(react-dom@18.2.0)(react@18.2.0)(viem@1.19.1)(wagmi@1.4.6)
   framer-motion:
     specifier: ^10.16.5
     version: 10.16.5(react-dom@18.2.0)(react@18.2.0)
@@ -2397,8 +2397,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@privy-io/wagmi-connector@0.1.5(@privy-io/react-auth@1.47.2)(react-dom@18.2.0)(react@18.2.0)(viem@1.19.1)(wagmi@1.4.6):
-    resolution: {integrity: sha512-EJ4V6Wk5XmNMSTWaahnU9r481oN5rODMk4/NCCZq2IXWss2EEBI1s71EBnN7cn7U+FAijA2QYeyVGnHUJmJI4A==}
+  /@privy-io/wagmi-connector@0.1.7-beta.1(@privy-io/react-auth@1.47.2)(react-dom@18.2.0)(react@18.2.0)(viem@1.19.1)(wagmi@1.4.6):
+    resolution: {integrity: sha512-QttW3pYCyMgRq+RMH1BHMG0R05x2d8CudGoAAG+YZrhUO8NhUqXpDmEDILvlPLRWUBXLSKRLT4Leyuvq6taVuQ==}
     peerDependencies:
       '@privy-io/react-auth': ^1.33.0
       react: ^18
